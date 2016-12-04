@@ -40,4 +40,22 @@ defmodule Eiga.Store do
       existing -> existing
     end
   end
+
+  @doc """
+  Insert a movie review, but only if it doesn't exist in the database yet.
+  Assumes that there is only one review per movie on a given date.
+  """
+  def insert_review(%{"location" => location, "short_title" => short_title, "text": text, "view_date": view_date}) do
+    {:ok, date} = Ecto.Date.cast(view_date)
+    # Movie must already be in the DB.
+    movie = Repo.get_by!(Movie, short_title: short_title)
+    Repo.insert(%Review{movie_id: movie.id, location: location, view_date: date, text: text},
+                on_confict: :ignore, conflict_target: [:movie_id, :view_date])
+  end
+  def insert_review(got) do  ## FIXME: What is wrong with the function clause above?!?
+    {:ok, date} = Ecto.Date.cast(got["view_date"])
+    movie = Repo.get_by!(Movie, short_title: got["short_title"])
+    Repo.insert(%Review{movie_id: movie.id, location: got["location"], view_date: date, text: got["text"]},
+                on_confict: :ignore, conflict_target: [:movie_id, :view_date])
+  end
 end
