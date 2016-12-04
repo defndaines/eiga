@@ -10,7 +10,7 @@ defmodule Eiga.RepoTest do
   setup_all do
     pid = case Eiga.start(nil, nil) do
       {:ok, pid} -> pid
-      {error, {:already_started, pid}} -> pid
+      {:error, {:already_started, pid}} -> pid
     end
     {:ok, [pid: pid]}
   end
