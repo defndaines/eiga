@@ -20,7 +20,6 @@ defmodule Eiga.Mixfile do
 
   defp deps do
     [{:maru, "~> 0.11.1"},
-     {:csv, "~> 1.4.4"},
      {:sqlite_ecto, "~> 1.1.0"},
      {:distillery, "~> 0.10.1"}]
   end
