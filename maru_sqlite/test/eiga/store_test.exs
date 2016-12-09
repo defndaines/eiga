@@ -13,7 +13,6 @@ defmodule Eiga.StoreTest do
     {:ok, [pid: pid]}
   end
 
-
   test "inserting movies is idempotent" do
     movie_map = %{"title" => "The Goonies",
       "short_title" => "goonies",
