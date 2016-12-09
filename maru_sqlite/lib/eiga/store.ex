@@ -49,10 +49,15 @@ defmodule Eiga.Store do
     {:ok, date} = Ecto.Date.cast(view_date)
     # Movie must already be in the DB.
     movie = Repo.get_by!(Movie, short_title: short_title)
-    Repo.insert(%Review{movie_id: movie.id, location: location, view_date: date, text: text},
-                on_confict: :ignore, conflict_target: [:movie_id, :view_date])
+    case Repo.get_by(Review, %{movie_id: movie.id, view_date: date}) do
+      nil ->
+        {:ok, new_review} = Repo.insert(%Review{movie_id: movie.id, location: location, view_date: date, text: text},
+                                        on_confict: :ignore, conflict_target: [:movie_id, :view_date])
+        new_review
+      existing -> existing
+    end
   end
-  def insert_review(got) do  ## FIXME: What is wrong with the function clause above?!?
+  def insert_review(got) do  ## FIXME: What is wrong with the function clause above?!? This gets called by data_import
     {:ok, date} = Ecto.Date.cast(got["view_date"])
     movie = Repo.get_by!(Movie, short_title: got["short_title"])
     case Repo.get_by(Review, %{movie_id: movie.id, view_date: date}) do
