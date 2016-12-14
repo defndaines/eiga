@@ -7,6 +7,7 @@ defmodule Eiga.DataImportTest do
     movie_dat = "../sql/movie.dat"
 
     File.stream!(movie_dat)
+    |> Stream.map(&String.trim/1)
     |> Stream.map(&line_to_movie/1)
     |> Enum.each(&Eiga.Store.insert_movie(&1))
 
@@ -16,6 +17,7 @@ defmodule Eiga.DataImportTest do
     review_dat = "../sql/review.dat"
 
     File.stream!(review_dat)
+    |> Stream.map(&String.trim/1)
     |> Stream.map(&line_to_review/1)
     |> Enum.each(&Eiga.Store.insert_review(&1))
 

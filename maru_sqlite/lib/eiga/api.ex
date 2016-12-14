@@ -17,6 +17,12 @@ defmodule Eiga.API do
     get do
       json(conn, Eiga.Store.all_movies())
     end
+
+    route_param :id do
+      get do
+        json(conn, Eiga.Store.get_movie(params[:id]))
+      end
+    end
   end
 
   namespace :reviews do

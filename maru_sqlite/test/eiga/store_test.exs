@@ -50,4 +50,38 @@ defmodule Eiga.StoreTest do
     Eiga.Repo.delete(review)
     Eiga.Repo.delete(movie)
   end
+
+  test "get movie by ID" do
+    movie_map = %{"title" => "The Goonies",
+      "short_title" => "goonies",
+      "year" => "1985",
+      "country" => "U.S."}
+    movie = Store.insert_movie(movie_map)
+
+    found = Store.get_movie(Integer.to_string(movie.id))
+    assert found.country == "U.S."
+    assert found.title == "The Goonies"
+    assert found.year == 1985
+
+    Eiga.Repo.delete(movie)
+  end
+
+  test "get movie by short title" do
+    movie_map = %{"title" => "The Goonies",
+      "short_title" => "goonies",
+      "year" => "1985",
+      "country" => "U.S."}
+    movie = Store.insert_movie(movie_map)
+
+    found = Store.get_movie("goonies")
+    assert found.country == "U.S."
+    assert found.title == "The Goonies"
+    assert found.year == 1985
+
+    Eiga.Repo.delete(movie)
+  end
+
+  test "get unknown movie" do
+    nil = Store.get_movie("mxyzptlk")
+  end
 end
