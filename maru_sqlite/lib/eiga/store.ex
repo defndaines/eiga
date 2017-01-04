@@ -12,7 +12,7 @@ defmodule Eiga.Store do
   @doc "Get a list of all movies watched."
   def all_movies do
     Movie
-    |> select([movie], movie)
+    |> select([movie], %{id: movie.id, title: movie.title, year: movie.year, country: movie.country, short_title: movie.short_title})
     |> Repo.all
   end
 

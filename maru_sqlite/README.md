@@ -71,5 +71,27 @@ Example:
 ```
 curl http://127.0.0.1:8080/movies
 
-TBD: Fill in with example data!
+[ { "id": 6, "year": 1999, "title": "Shiri", "short_title": "shiri", "country": "South Korea" }
+, { "id": 7, "year": 1999, "title": "Nowhere to Hide", "short_title": "nowhere2hide", "country": "South Korea" }
+, { "id": 8, "year": 1983, "title": "Evil Dead", "short_title": "evildead", "country": "U.S." }
+,,,
+]
+```
+
+### GET `/movies/id`
+
+Get an individual movie by ID. (Note that the IDs are not stable in test mode.)
+```
+curl http://127.0.0.1:8080/movies/622
+
+{ "year": 2006, "title": "Finishing the Game", "id": 622, "country": "U.S." }
+```
+
+### GET `/movies/short_title`
+
+Get an individual movie by short title.
+```
+curl http://127.0.0.1:8080/movies/shiri
+
+{ "year": 1999, "title": "Shiri", "id": 6, "country": "South Korea" }
 ```
