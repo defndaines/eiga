@@ -56,6 +56,32 @@ defmodule Eiga.Store do
     Repo.all(query)
   end
 
+  @doc "Get a review."
+  def get_review(id) do
+    case Integer.parse(id) do
+      {review_id, ""} -> query_review_by_id(review_id)
+      _ -> query_review_by_short_title(id)
+    end
+  end
+
+  defp query_review_by_id(id) do
+    query = from r in Review,
+            where: r.id == ^id,
+            join: m in Movie, where: r.movie_id == m.id,
+            select: %{movie: m.title, year: m.year, country: m.country,
+              location: r.location, view_date: r.view_date, review: r.text}
+    Repo.all(query)
+  end
+
+  defp query_review_by_short_title(short_title) do
+    query = from r in Review,
+            join: m in Movie, where: r.movie_id == m.id,
+            where: m.short_title == ^short_title,
+            select: %{movie: m.title, year: m.year, country: m.country,
+              location: r.location, view_date: r.view_date, review: r.text}
+    Repo.all(query)
+  end
+
   @doc """
   Insert a movie, but only if it doesn't exist in the database yet.
   Assumes that there is only one movie per year with a given name.

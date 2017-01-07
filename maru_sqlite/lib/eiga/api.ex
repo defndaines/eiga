@@ -36,6 +36,12 @@ defmodule Eiga.API do
       size = if params[:size] do params[:size] else 10 end
       json(conn, Eiga.Store.all_reviews(page, size))
     end
+
+    route_param :id do
+      get do
+        json(conn, Eiga.Store.get_review(params[:id]))
+      end
+    end
   end
 
   def error(conn, e) do

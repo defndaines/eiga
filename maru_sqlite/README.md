@@ -116,3 +116,34 @@ Using pagination:
 ```
 curl 'http://127.0.0.1:8080/reviews?page=3&size=15'
 ```
+
+### GET `/reviews/id`
+
+```
+curl 'http://127.0.0.1:8080/reviews/13'
+
+[ { "year": 1994, "view_date": "2001-01-12"
+  , "review":"<p>OK, I've already seen this movie a number of times. ..."
+  , "movie": "Drunken Master II", "location": "DVD at home"
+  , "country": "Hong Kong"
+  }
+]
+```
+
+### GET `/reviews/short_title`
+
+```
+curl 'http://127.0.0.1:8080/reviews/dm2'
+
+[ { "year": 1994, "view_date": "2001-01-12"
+  , "review":"<p>OK, I've already seen this movie a number of times. ..."
+  , "movie": "Drunken Master II", "location": "DVD at home"
+  , "country": "Hong Kong"
+  }
+, { "year": 1994, "view_date": "2004-06-07"
+  , "review": "<p>I hadn't watched this movie in a while and ...."
+  , "movie": "Drunken Master II", "location":"DVD at home"
+  , "country": "Hong Kong"
+  }
+]
+```
