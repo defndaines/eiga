@@ -45,10 +45,12 @@ defmodule Eiga.Store do
   end
 
   @doc "Get a list of all reviews."
-  def all_reviews do
+  def all_reviews(page \\ 1, size \\ 10) do
     query = from r in Review,
             join: m in Movie,
             order_by: r.view_date,
+            limit: ^size,
+            offset: ^((page - 1) * size),
             select: %{movie: m.title, year: m.year, country: m.country,
               location: r.location, view_date: r.view_date, review: r.text}
     Repo.all(query)

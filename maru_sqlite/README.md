@@ -95,3 +95,19 @@ curl http://127.0.0.1:8080/movies/shiri
 
 { "year": 1999, "title": "Shiri", "id": 6, "country": "South Korea" }
 ```
+
+### GET `/reviews`
+
+Get movie reviews. Because the amount of data, reviews must be paginated.
+Calling the endpoint without query parameters will return the first ten results.
+
+```
+curl http://127.0.0.1:8080/reviews
+
+[ { "year": 1999, "view_date": "2000-12-23"
+  , "review": "<p>I started hearing about this ...."
+  , "movie": "Shiri", "location": "DVD at home", "country": "South Korea" }
+, { "year": 1999, "view_date": "2000-12-23", ,,, }
+,,,
+]
+```
