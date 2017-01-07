@@ -111,3 +111,8 @@ curl http://127.0.0.1:8080/reviews
 ,,,
 ]
 ```
+
+Using pagination:
+```
+curl 'http://127.0.0.1:8080/reviews?page=3&size=15'
+```

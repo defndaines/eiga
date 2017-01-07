@@ -27,8 +27,14 @@ defmodule Eiga.API do
 
   namespace :reviews do
     desc "All movie reviews."
+    params do
+      optional :page, type: Integer
+      optional :size, type: Integer, values: 10..100
+    end
     get do
-      json(conn, Eiga.Store.all_reviews())
+      page = if params[:page] do params[:page] else 1 end
+      size = if params[:size] do params[:size] else 10 end
+      json(conn, Eiga.Store.all_reviews(page, size))
     end
   end
 
