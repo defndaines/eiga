@@ -87,7 +87,7 @@ defmodule Eiga.Store do
   Assumes that there is only one movie per year with a given name.
   """
   def insert_movie(%{"title" => title, "short_title" => short_title, "year" => year, "country" => country}) do
-    date = String.to_integer(year)
+    date = if is_integer(year) do year else String.to_integer(year) end
     case Repo.get_by(Movie, %{title: title, year: date}) do
       nil ->
         {:ok, new_movie} = Repo.insert(%Movie{title: title, short_title: short_title, year: date, country: country},

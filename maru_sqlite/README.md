@@ -78,6 +78,17 @@ curl http://127.0.0.1:8080/movies
 ]
 ```
 
+### PUT `/movies`
+
+Enter a new movie into the system. Returns the ID of the movie.
+
+Example:
+```
+curl -X PUT -H 'Content-Type: application/json' http://127.0.0.1:8080/movies \
+  -d '{"title": "The Goonies", "short_title": "goonies", "year": 1985, "country": "U.S."}'
+
+676
+```
 ### GET `/movies/id`
 
 Get an individual movie by ID. (Note that the IDs are not stable in test mode.)
