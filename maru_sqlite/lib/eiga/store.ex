@@ -47,7 +47,7 @@ defmodule Eiga.Store do
   @doc "Get a list of all reviews."
   def all_reviews(page \\ 1, size \\ 10) do
     query = from r in Review,
-            join: m in Movie,
+            join: m in Movie, where: r.movie_id == m.id,
             order_by: r.view_date,
             limit: ^size,
             offset: ^((page - 1) * size),
