@@ -4,7 +4,7 @@ defmodule Eiga.Mixfile do
   def project do
     [app: :eiga,
      version: "0.1.0",
-     elixir: "~> 1.3",
+     elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -19,7 +19,7 @@ defmodule Eiga.Mixfile do
   end
 
   defp deps do
-    [{:maru, "~> 0.11.1"},
+    [{:maru, "~> 0.11.3"},
      {:sqlite_ecto, "~> 1.1.0"},
      {:distillery, "~> 0.10.1"}]
   end

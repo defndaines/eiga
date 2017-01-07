@@ -4,7 +4,7 @@
   "distillery": {:hex, :distillery, "0.10.1", "14fccade4b8ab849b99e21c4bdfaa1092dbacdce8afd33f5c369c6e114385b0e", [:mix], []},
   "ecto": {:hex, :ecto, "1.1.9", "6f30e4662d540c794048e62a04926c1d3c892a2ba4704fe1e19d4a9b5b2f881e", [:mix], [{:decimal, "~> 1.0", [hex: :decimal, optional: false]}, {:mariaex, "~> 0.5.0 or ~> 0.6.0", [hex: :mariaex, optional: true]}, {:poison, "~> 1.0 or ~> 2.0", [hex: :poison, optional: true]}, {:poolboy, "~> 1.4", [hex: :poolboy, optional: false]}, {:postgrex, "~> 0.11.0", [hex: :postgrex, optional: true]}, {:sbroker, "~> 0.7", [hex: :sbroker, optional: true]}]},
   "esqlite": {:hex, :esqlite, "0.2.2", "e4e8b39062a075e0bd4756b894dd2aa8edbf94c9081c1fb5c72dc705bf2f2d88", [:rebar, :make], []},
-  "maru": {:hex, :maru, "0.11.1", "b17dd7c8eb65e6824c82ad0793bc1e82292ef93768856064a1bf7a1eb05e099e", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:poison, "~> 1.5 or ~> 2.0 or ~> 3.0", [hex: :poison, optional: false]}]},
+  "maru": {:hex, :maru, "0.11.3", "0bf2f26955430c4878dab91fe44aeb8b3aaed338b4f6ffd0729ea119284c374d", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:poison, "~> 1.5 or ~> 2.0 or ~> 3.0", [hex: :poison, optional: false]}]},
   "mime": {:hex, :mime, "1.0.1", "05c393850524767d13a53627df71beeebb016205eb43bfbd92d14d24ec7a1b51", [:mix], []},
   "parallel_stream": {:hex, :parallel_stream, "1.0.5", "4c78d3e675f9eff885cbe252c89a8fc1d2fb803c0d03a914281e587834e09431", [:mix], []},
   "pipe": {:hex, :pipe, "0.0.2", "eff98a868b426745acef103081581093ff5c1b88100f8ff5949b4a30e81d0d9f", [:mix], []},
