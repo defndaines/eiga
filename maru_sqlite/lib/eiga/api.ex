@@ -27,7 +27,9 @@ defmodule Eiga.API do
     end
     put do
       movie = Eiga.Store.insert_movie(params)
-      json(conn, movie.id)
+      conn
+      |> put_status(201)
+      |> json(movie.id)
     end
 
     route_param :id do
