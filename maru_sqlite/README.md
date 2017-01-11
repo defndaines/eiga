@@ -89,6 +89,7 @@ curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8080/movies \
 
 676
 ```
+
 ### GET `/movies/id`
 
 Get an individual movie by ID. (Note that the IDs are not stable in test mode.)
@@ -105,6 +106,19 @@ Get an individual movie by short title.
 curl http://127.0.0.1:8080/movies/shiri
 
 { "year": 1999, "title": "Shiri", "id": 6, "country": "South Korea" }
+```
+
+### PUT `/movies/short_title`
+
+Enter a new movie into the system, providing the "short title" through the URL.
+Returns the ID of the movie.
+
+Example:
+```
+curl -X PUT -H 'Content-Type: application/json' http://127.0.0.1:8080/movies/goonies \
+  -d '{"title": "The Goonies", "year": 1985, "country": "U.S."}'
+
+676
 ```
 
 ### GET `/reviews`

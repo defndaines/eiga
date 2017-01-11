@@ -36,6 +36,19 @@ defmodule Eiga.API do
       get do
         json(conn, Eiga.Store.get_movie(params[:id]))
       end
+
+      desc "Adds a new movie."
+      params do
+        requires "title", type: String
+        requires "year", type: Integer, values: 1878..2038
+        requires "country", type: String
+      end
+      put do
+        movie = Eiga.Store.insert_movie(Map.put(params, "short_title", params[:id]))
+        conn
+        |> put_status(201)
+        |> json(movie.id)
+      end
     end
   end
 
