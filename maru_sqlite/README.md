@@ -81,6 +81,7 @@ curl http://127.0.0.1:8080/movies
 ### POST `/movies`
 
 Enter a new movie into the system. Returns the ID of the movie.
+Returns 201 if a new movies is created, 200 if the movie already exists.
 
 Example:
 ```
@@ -111,7 +112,8 @@ curl http://127.0.0.1:8080/movies/shiri
 ### PUT `/movies/short_title`
 
 Enter a new movie into the system, providing the "short title" through the URL.
-Returns the ID of the movie.
+Returns the ID of the movie. Returns 201 if a new movies is created, 200 if the
+movie already exists.
 
 Example:
 ```

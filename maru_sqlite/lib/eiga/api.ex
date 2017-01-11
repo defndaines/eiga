@@ -26,9 +26,9 @@ defmodule Eiga.API do
       requires "country", type: String
     end
     post do
-      movie = Eiga.Store.insert_movie(params)
+      {type, movie} = Eiga.Store.insert_movie(params)
       conn
-      |> put_status(201)
+      |> put_status(if type == :new do 201 else 200 end)
       |> json(movie.id)
     end
 
@@ -44,9 +44,9 @@ defmodule Eiga.API do
         requires "country", type: String
       end
       put do
-        movie = Eiga.Store.insert_movie(Map.put(params, "short_title", params[:id]))
+        {type, movie} = Eiga.Store.insert_movie(Map.put(params, "short_title", params[:id]))
         conn
-        |> put_status(201)
+        |> put_status(if type == :new do 201 else 200 end)
         |> json(movie.id)
       end
     end

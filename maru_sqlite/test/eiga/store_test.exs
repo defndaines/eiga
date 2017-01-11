@@ -18,12 +18,12 @@ defmodule Eiga.StoreTest do
       "short_title" => "goonies",
       "year" => "1985",
       "country" => "U.S."}
-    movie = Store.insert_movie(movie_map)
+    {_, movie} = Store.insert_movie(movie_map)
 
     movie_list = Eiga.Movie |> select([movie], movie.title) |> Eiga.Repo.all
     assert Enum.find(movie_list, &(&1 == movie_map["title"]))
 
-    assert movie == Store.insert_movie(movie_map)
+    assert {:existing, movie} == Store.insert_movie(movie_map)
     assert Enum.filter(movie_list, &(&1 == movie_map["title"])) == [Enum.find(movie_list, &(&1 == movie_map["title"]))]
 
     Eiga.Repo.delete(movie)
@@ -34,7 +34,7 @@ defmodule Eiga.StoreTest do
       "short_title" => "the-goonies",
       "year" => "1985",
       "country" => "U.S."}
-    movie = Store.insert_movie(movie_map)
+    {_, movie} = Store.insert_movie(movie_map)
 
     review_map = %{"location" => "Blu Ray at Home",
       "short_title" => "the-goonies",
@@ -56,7 +56,7 @@ defmodule Eiga.StoreTest do
       "short_title" => "goonies",
       "year" => "1985",
       "country" => "U.S."}
-    movie = Store.insert_movie(movie_map)
+    {_, movie} = Store.insert_movie(movie_map)
 
     found = Store.get_movie(Integer.to_string(movie.id))
     assert found.country == "U.S."
@@ -71,7 +71,7 @@ defmodule Eiga.StoreTest do
       "short_title" => "goonies",
       "year" => "1985",
       "country" => "U.S."}
-    movie = Store.insert_movie(movie_map)
+    {_, movie} = Store.insert_movie(movie_map)
 
     found = Store.get_movie("goonies")
     assert found.country == "U.S."

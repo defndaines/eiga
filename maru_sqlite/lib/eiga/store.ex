@@ -83,7 +83,9 @@ defmodule Eiga.Store do
   end
 
   @doc """
-  Insert a movie, but only if it doesn't exist in the database yet.
+  Insert a movie.
+  If it doesn't exist in the database yet, returns {:new, Movie}.
+  If the movie already exists, returns {:existing, Movie} without changing.
   Assumes that there is only one movie per year with a given name.
   """
   def insert_movie(%{"title" => title, "short_title" => short_title, "year" => year, "country" => country}) do
@@ -92,8 +94,8 @@ defmodule Eiga.Store do
       nil ->
         {:ok, new_movie} = Repo.insert(%Movie{title: title, short_title: short_title, year: date, country: country},
                                        on_conflict: :ignore, conflict_taget: [:title, :year])
-        new_movie
-      existing -> existing
+        {:new, new_movie}
+      existing -> {:existing, existing}
     end
   end
 
