@@ -25,7 +25,7 @@ defmodule Eiga.API do
       requires "year", type: Integer, values: 1878..2038
       requires "country", type: String
     end
-    put do
+    post do
       movie = Eiga.Store.insert_movie(params)
       conn
       |> put_status(201)
