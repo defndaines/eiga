@@ -5,7 +5,8 @@ REST-like interface to the Eiga reviews data, using
 
 ## Getting Started
 
-This project is written in Clojure and assumes you have `lein` installed.
+This project is written in Clojure and assumes you have
+[lein](http://leiningen.org/) installed.
 
 1. Start the application: `lein run`
 2. Go to [localhost:8080](http://localhost:8080/) to see: `Hello World!`
