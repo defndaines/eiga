@@ -2,6 +2,7 @@
   (:require [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
+            [io.pedestal.http.route.definition.table :refer [table-routes]]
             [ring.util.response :as ring-resp]))
 
 (defn about-page
@@ -12,7 +13,47 @@
 
 (defn home-page
   [request]
-  (ring-resp/response "Hello World!"))
+  (ring-resp/response "映画 Home"))
+
+(defn list-movies
+  [request]
+  (ring-resp/response [{:id 8001 :year 1999 :title "Shiri" :short-title "shiri" :country "South Korea"}]))
+
+(defn get-movie
+  [{short-title :short-title}]
+  (ring-resp/response {:id 8001 :year 1999 :title "Shiri" :short-title "shiri" :country "South Korea"}))
+
+(defn put-movie
+  [request]
+  (ring-resp/response "PUT 映画"))
+
+(defn delete-movie
+  [request]
+  (ring-resp/response "DELETE 映画"))
+
+(defn get-reviews-for-movie
+  [request]
+  (ring-resp/response "GET 映画 Reviews"))
+
+(defn post-reviews-for-movie
+  [request]
+  (ring-resp/response "POST 映画 Reviews"))
+
+(defn list-reviews
+  [request]
+  (ring-resp/response "List 映画 Reviews"))
+
+(defn get-review
+  [request]
+  (ring-resp/response "GET 映画 Review"))
+
+(defn put-review
+  [request]
+  (ring-resp/response "PUT 映画 Review"))
+
+(defn delete-review
+  [request]
+  (ring-resp/response "DELETE 映画 Review"))
 
 ;; Defines "/" and "/about" routes with their associated :get handlers.
 ;; The interceptors defined after the verb map (e.g., {:get home-page}
@@ -21,18 +62,16 @@
 
 ;; Tabular routes
 (def routes #{["/" :get (conj common-interceptors `home-page)]
-              ["/about" :get (conj common-interceptors `about-page)]})
-
-;; Map-based routes
-;(def routes `{"/" {:interceptors [(body-params/body-params) http/html-body]
-;                   :get home-page
-;                   "/about" {:get about-page}}})
-
-;; Terse/Vector-based routes
-;(def routes
-;  `[[["/" {:get home-page}
-;      ^:interceptors [(body-params/body-params) http/html-body]
-;      ["/about" {:get about-page}]]]])
+              ["/about" :get (conj common-interceptors `about-page)]
+              ["/movies" :get (conj common-interceptors `list-movies)]
+              ["/movies/:short-title" :get (conj common-interceptors `get-movie)]
+              ["/movies/:short-title" :put (conj common-interceptors `put-movie)]
+              ["/movies/:short-title" :delete (conj common-interceptors `delete-movie)]
+              ["/movies/:short-title/reviews" :get (conj common-interceptors `get-reviews-for-movie)]
+              ["/movies/:short-title/reviews" :post (conj common-interceptors `post-reviews-for-movie)]
+              ["/reviews" :get (conj common-interceptors `list-reviews)]
+              ["/reviews/:id" :get (conj common-interceptors `get-review)]
+              ["/reviews/:id" :delete (conj common-interceptors `delete-review)]})
 
 
 ;; Consumed by eiga.server/create-server
