@@ -1,6 +1,6 @@
-# eiga
+# Eiga
 
-FIXME
+Exposes the Eiga dataset using [vase](https://github.com/cognitect-labs/vase).
 
 ## Getting Started
 
@@ -43,9 +43,22 @@ Once the image it built, it's cached.  To delete the image and build a new one:
 1. `capstan rmi eiga; capstan build`
 
 
+## API
+
+This section documents the endpoints supported by this service.
+
+### Movies
+
+```shell
+curl http://localhost:8080/api/eiga/v1/movies
+```
+
+```shell
+curl -H "Content-Type: application/json" -X POST -d '{"payload":[{"movie/title":"Shiri","movie/year":1999,"movie/country":"South Korea"}]}' http://localhost:8080/api/eiga/v1/movies
+```
+
+
 ## Links
 
  * [Pedestal examples](https://github.com/pedestal/samples)
- * [Vase examples](https://github.com/___/vase/samples)
-
-
+ * [Vase examples](https://github.com/cognitect-labs/vase/samples)
