@@ -1,6 +1,6 @@
 # Eiga
 
-REST-like interface to the Eiga reviews data, using
+HTTP service interface to the Eiga reviews data, using
 [Maru](https://github.com/elixir-maru/maru) and
 [Sqlite.Ecto](https://github.com/jazzyb/sqlite_ecto).
 
