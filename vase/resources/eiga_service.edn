@@ -1,17 +1,16 @@
 {:activated-apis [:eiga/v1]
- :datomic-uri "datomic:mem://example"
+ :datomic-uri "datomic:mem://eiga"
  :descriptor
- ;; Datomic Schema Norms
- ;; --------------------
  {:vase/norms
-  {:eiga/movie
+  {:eiga/movie-schema
    {:vase.norm/txes [#vase/schema-tx
-                     [[:movie/movie-id :one  :long   :unique "The unique identifier of a movie."]
-                      [:movie/title    :one  :string         "The title of a movie."]
-                      [:movie/year     :one  :long           "The year the movie was released."]
+                     [[:eiga.movie/id :one :long :unique "The unique identifier of a movie."]
+                      [:eiga.movie/short-title :one :string :unique "The unique abbreviation for the movie."]
+                      [:eiga.movie/title :one :string "The title of a movie."]
+                      [:eiga.movie/year :one :long "The year the movie was released."]
                       ;; TODO Should be possible to have multiple countries. Get one country working first.
                       ; [:movie/country  :many :string         "Countries where the movie was produced."]
-                      [:movie/country  :one :string          "Country where the movie was produced."]]]}
+                      [:eiga.movie/country :one :string "Country where the movie was produced."]]]}
    ; :eiga/review
    ; {:vase.norm/requires [:eiga/movie]
     ; :vase.norm/txes [#vase/schema-tx
@@ -21,53 +20,44 @@
                       ; [:review/text      :one :string  :fulltext "The text of the movie review in formatted HTML."]
                       ; [:review/movie     :one :ref               "The movie this is a review of."]]]}
    }
-
-  ;; Global Specs for the API
-  ;; ------------------------
   :vase/specs
   {:eiga.movie/title (clojure.spec/and string? not-empty)
    :eiga.movie/year (fn [year] (>= (.getYear (java.time.LocalDate/now)) year 1878))
    :eiga.movie/country (clojure.spec/and string? not-empty)
-   ; :eiga.review/location (clojure.spec/and string? not-empty)
-   ; :eiga.review/view-date (fn [date] (>= (java.time.LocalDate/now) date (java.time.LocalDate/of 2000 12 23)))
-   ; :eiga.review/text (clojure.spec/and string? not-empty)
+   :eiga.review/location (clojure.spec/and string? not-empty)
+   :eiga.review/view-date (fn [date] (>= (java.time.LocalDate/now) date (java.time.LocalDate/of 2000 12 23)))
+   :eiga.review/text (clojure.spec/and string? not-empty)
    }
-
-  ;; API Tagged Chunks/Versions
-  ;; --------------------------
   :vase/apis
   {:eiga/v1
    {:vase.api/routes
-    {"/about" {:get #vase/respond {:name :eiga.v1/about-response
-                                   :body "A True and Complete Record of Movies Watched."}}
-
-     "/movies" {:get #vase/query {:name :eiga.v1/movies-page
+    {"/movies" {:get #vase/query {:name :eiga-v1/movies-page
                                   :params []
-                                  :query [:find ?id ?title
+                                  :query [:find (pull ?e [*])
+                                          :in $
                                           :where
-                                          [?e :movie/movie-id ?id]
-                                          [?e :movie/title ?title]]}
-                :post #vase/transact {:name :eiga.v1/movie-create
-                                      ;; `:properties` are pulled from the parameters
+                                          [?e :eiga.movie/short-title ?short-title]]}
+                :post #vase/transact {:name :eiga-v1/movie-create
                                       :properties [:db/id
-                                                   :movie/title
-                                                   :movie/year
-                                                   :movie/country]}}
+                                                   :eiga.movie/short-title
+                                                   :eiga.movie/title
+                                                   :eiga.movie/year
+                                                   :eiga.movie/country]}}
 
-     "/movies/:id" {:get #vase/query {:name :eiga.v1/movie-id-page
-                                      :params [id]
-                                      :edn-coerce [id]
+     "/movies/:id" {:get #vase/query {:name :eiga-v1/movie-id-page
+                                      :params [short-title]
+                                      :edn-coerce [short-title]
                                       :query [:find ?e
-                                              :in $ ?id
+                                              :in $ ?short-title
                                               :where
-                                              [?e :movie/movie-id ?id]]}
+                                              [?e :eiga.movie/short-title ?short-title]]}
                     ;; TODO Add :put to allow existing movie information to be corrected.
-                    :delete #vase/transact {:name :eiga.v1/movie-delete
+                    :delete #vase/transact {:name :eiga-v1/movie-delete
                                             :db-op :vase/retract-entity
                                             ;; :vase/retract-entity requires :db/id to be supplied
                                             :properties [:db/id]}}
      }
 
     ;:vase.api/interceptors [] ;; Any extra interceptors to apply to this API chunk/version
-    :vase.api/schemas [:eiga/movie] ;; TODO Add in reviews
+    :vase.api/schemas [:eiga/movie-schema] ;; TODO Add in reviews
     :vase.api/forward-headers ["vaserequest-id"]}}}}
