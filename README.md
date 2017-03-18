@@ -28,6 +28,13 @@ The [maru_sqlite](maru_sqlite) project is written in Elixir and uses
 approach to exposing the data, useful for me in exploring putting an Elixir
 project together without Phoenix.
 
+## Vase
+
+The [vase](vase) project is written using the
+[vase](https://github.com/cognitect-labs/vase) Clojure library. Vase pushes most
+of the work into configuration files. By default, vase uses Datomic to store
+data.
+
 ## Copyright
 
 Copyright Michael S. Daines, 2000-2017. All Rights Reserved.
