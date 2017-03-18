@@ -1,7 +1,12 @@
 # Eiga
 
-REST-like interface to the Eiga reviews data, using
+Web service interface to the Eiga reviews data, using
 [Pedestal](https://github.com/pedestal/pedestal)
+
+## Current Status
+
+I've only defined the routing scheme for this project, but have not wired in any
+handling or database code.
 
 ## Getting Started
 

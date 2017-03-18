@@ -4,6 +4,11 @@ HTTP service interface to the Eiga reviews data, using
 [Maru](https://github.com/elixir-maru/maru) and
 [Sqlite.Ecto](https://github.com/jazzyb/sqlite_ecto).
 
+## Status
+
+This project provides access to all the Eiga data. I didn't complete the
+bundling of the project into a release.
+
 ## Development
 
 This project is written in Elixir. In order to build and run it, you will need

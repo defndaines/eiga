@@ -2,6 +2,12 @@
 
 Exposes the Eiga dataset using [vase](https://github.com/cognitect-labs/vase).
 
+## Status
+
+I'm in the process of learning the vase API and configuring the schema and
+endpoints. At this time the loading of data is manual, as it only uses an
+in-memory Datomic database.
+
 ## Getting Started
 
 1. Start the application: `lein run`
