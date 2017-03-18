@@ -1,0 +1,75 @@
+{:activated-apis [:eiga/v1]
+ :datomic-uri "datomic:mem://eiga"
+ :descriptor
+ {:vase/norms
+  {:eiga/movie-schema
+   {:vase.norm/txes [#vase/schema-tx
+                     [[:eiga.movie/id :one :long :unique "The unique identifier of a movie."]
+                      [:eiga.movie/short-title :one :string :unique "The unique abbreviation for the movie."]
+                      [:eiga.movie/title :one :string "The title of a movie."]
+                      [:eiga.movie/year :one :long "The year the movie was released."]
+                      [:eiga.movie/country :many :string "Countries where the movie was produced."]]]}
+   :eiga/review-schema
+   {:vase.norm/requires [:eiga/movie-schema]
+    :vase.norm/txes [#vase/schema-tx
+                     [[:eiga.review/id :one :long :unique "The unique identifier of a review."]
+                      [:eiga.review/location :one :string "Where the movie was watched for this review."]
+                      [:eiga.review/view-date :one :string "When the movie was watched for this review."]
+                      ;; TODO Need to figure out how to pass date fields into Vase/Pedestal.
+                      ; [:eiga.review/view-date :one :instant "When the movie was watched for this review."]
+                      [:eiga.review/text :one :string :fulltext "The text of the movie review in formatted HTML."]
+                      [:eiga.review/movie :one :ref "The movie this is a review of."]]]}
+   }
+  :vase/specs
+  {:eiga.movie/title (clojure.spec/and string? not-empty)
+   :eiga.movie/year (fn [year] (>= (.getYear (java.time.LocalDate/now)) year 1878))
+   ; :eiga.movie/country (clojure.spec/and string? not-empty)
+   :eiga.review/location (clojure.spec/and string? not-empty)
+   ; :eiga.review/view-date (fn [date] (>= (java.time.LocalDate/now) date (java.time.LocalDate/of 2000 12 23)))
+   :eiga.review/text (clojure.spec/and string? not-empty)
+   }
+  :vase/apis
+  {:eiga/v1
+   {:vase.api/routes
+    {"/movies" {:get #vase/query {:name :eiga-v1/movies-page
+                                  :params []
+                                  :query [:find (pull ?e [*])
+                                          :in $
+                                          :where
+                                          [?e :eiga.movie/short-title ?short-title]]}
+                :post #vase/transact {:name :eiga-v1/movie-create
+                                      :properties [:db/id
+                                                   :eiga.movie/short-title
+                                                   :eiga.movie/title
+                                                   :eiga.movie/year
+                                                   :eiga.movie/country]}}
+
+     "/movies/:id" {:get #vase/query {:name :eiga-v1/movie-id-page
+                                      :params [short-title]
+                                      :edn-coerce [short-title]
+                                      :query [:find ?e
+                                              :in $ ?short-title
+                                              :where
+                                              [?e :eiga.movie/short-title ?short-title]]}
+                    ;; TODO Add :put to allow existing movie information to be corrected.
+                    :delete #vase/transact {:name :eiga-v1/movie-delete
+                                            :db-op :vase/retract-entity
+                                            ;; :vase/retract-entity requires :db/id to be supplied
+                                            :properties [:db/id]}}
+     "/reviews" {:get #vase/query {:name :eiga-v1/reviews-page
+                                   :params []
+                                   :query [:find (pull ?e [*])
+                                           :in $
+                                           :where
+                                           [?e :eiga.review/id ?id]]}
+                 :post #vase/transact {:name :eiga-v1/review-create
+                                       :properties [:db/id
+                                                    :eiga.review/movie
+                                                    :eiga.review/location
+                                                    :eiga.review/view-date
+                                                    :eiga.review/text]}}
+     }
+
+    ;:vase.api/interceptors [] ;; Any extra interceptors to apply to this API chunk/version
+    :vase.api/schemas [:eiga/movie-schema :eiga/review-schema]
+    :vase.api/forward-headers ["vaserequest-id"]}}}}
