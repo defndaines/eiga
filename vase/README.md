@@ -49,10 +49,16 @@ This section documents the endpoints supported by this service.
 
 ### Movies
 
+#### `GET movies`
+
+Get a list of all movies.
 ```shell
 curl http://localhost:8080/api/eiga/v1/movies
 ```
 
+#### `POST movies`
+
+Add a movie.
 ```shell
 curl -H "Content-Type: application/json" -X POST \
 -d '{"payload":[{"eiga.movie/short-title":"shiri","eiga.movie/title":"Shiri","eiga.movie/year":1999,"eiga.movie/country":"South Korea"}]}' \
