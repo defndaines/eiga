@@ -10,7 +10,7 @@
                       [:eiga.movie/year :one :long "The year the movie was released."]
                       ;; TODO Should be possible to have multiple countries. Get one country working first.
                       ; [:movie/country  :many :string         "Countries where the movie was produced."]
-                      [:eiga.movie/country :one :string "Country where the movie was produced."]]]}
+                      [:eiga.movie/country :many :string "Countries where the movie was produced."]]]}
    ; :eiga/review
    ; {:vase.norm/requires [:eiga/movie]
     ; :vase.norm/txes [#vase/schema-tx
@@ -23,7 +23,7 @@
   :vase/specs
   {:eiga.movie/title (clojure.spec/and string? not-empty)
    :eiga.movie/year (fn [year] (>= (.getYear (java.time.LocalDate/now)) year 1878))
-   :eiga.movie/country (clojure.spec/and string? not-empty)
+   ; :eiga.movie/country (clojure.spec/and string? not-empty)
    :eiga.review/location (clojure.spec/and string? not-empty)
    :eiga.review/view-date (fn [date] (>= (java.time.LocalDate/now) date (java.time.LocalDate/of 2000 12 23)))
    :eiga.review/text (clojure.spec/and string? not-empty)

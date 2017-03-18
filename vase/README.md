@@ -65,6 +65,14 @@ curl -H "Content-Type: application/json" -X POST \
 'http://localhost:8080/api/eiga/v1/movies'
 ```
 
+Add a movie with multiple countries.
+```shell
+curl -H "Content-Type: application/json" -X POST \
+-d '{"payload":[{"eiga.movie/short-title":"cthd","eiga.movie/title":"Crouching Tiger, Hidden Dragon","eiga.movie/year":2000,"eiga.movie/country":["China","Hong Kong","Taiwan","U.S."]}]}' \
+'http://localhost:8080/api/eiga/v1/movies'
+```
+
+
 
 ## Links
 
