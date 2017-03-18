@@ -31,9 +31,16 @@ project together without Phoenix.
 ## Vase
 
 The [vase](vase) project is written using the
-[vase](https://github.com/cognitect-labs/vase) Clojure library. Vase pushes most
+[cognitect/vase](https://github.com/cognitect-labs/vase) Clojure library. Vase pushes most
 of the work into configuration files. By default, vase uses Datomic to store
-data.
+data. Vase is built on top pedestal.
+
+## Pedestal
+
+The [pedestal](pedestal) project is written using the
+(pedestal)[https://github.com/pedestal/pedestal] Clojure library. Pedestal
+provides the web service layer. I have not yet determined which database this
+project will use.
 
 ## Copyright
 
