@@ -20,6 +20,15 @@ consists of two tables: `movies` and `reviews`. `movies` tracks the facts about
 the movies watched, while `reviews` captures my review along with when and where
 I watched the film.
 
+[eiga-lite.sql](sql/eiga-lite.sql) takes the MySQL format and strips it
+down to a more ANSI-compliant format which can be read into SQLite with `.read
+eiga-lite.sql`. The tables can then be queried from the command line.
+
+[movie.dat](sql/movie.dat) and [review.dat](sql/review.dat) are pipe-delimited
+data import files, without headers, which are used to import the data into the
+applications.
+
+
 ## Maru SQLite
 
 The [maru_sqlite](maru_sqlite) project is written in Elixir and uses 
@@ -44,4 +53,4 @@ project will use.
 
 ## Copyright
 
-Copyright Michael S. Daines, 2000-2017. All Rights Reserved.
+Copyright Michael S. Daines, 2000-2018. All Rights Reserved.
