@@ -47,7 +47,7 @@ data. Vase is built on top pedestal.
 ## Pedestal
 
 The [pedestal](pedestal) project is written using the
-(pedestal)[https://github.com/pedestal/pedestal] Clojure library. Pedestal
+[pedestal](https://github.com/pedestal/pedestal) Clojure library. Pedestal
 provides the web service layer. I have not yet determined which database this
 project will use.
 
