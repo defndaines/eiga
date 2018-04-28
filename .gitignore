@@ -10,3 +10,4 @@ rel/example_project
 .rebar
 sql/grant.sql
 TODO.md
+*.swp
