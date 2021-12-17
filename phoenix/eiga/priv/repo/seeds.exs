@@ -22,3 +22,16 @@ File.stream!("../../sql/movie.dat")
   }
   |> Eiga.Repo.insert!(on_conflict: :nothing)
 end)
+
+File.stream!("../../sql/review.dat")
+|> Enum.each(fn line ->
+  [_, short_title, location, view_date, text] = line |> String.trim() |> String.split("|")
+
+  %Eiga.Schema.Review{
+    short_title: short_title,
+    location: location,
+    view_date: Date.from_iso8601!(view_date),
+    text: text
+  }
+  |> Eiga.Repo.insert!(on_conflict: :nothing)
+end)
