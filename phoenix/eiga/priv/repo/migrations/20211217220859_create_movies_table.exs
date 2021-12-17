@@ -2,6 +2,7 @@ defmodule Eiga.Repo.Migrations.CreateMoviesTable do
   use Ecto.Migration
 
   def change do
+    # NOTE: Hindsight, this should be it's own migration, coupled with `DROP EXTENSION` statement.
     execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
 
     create table(:movies, primary_key: false) do
