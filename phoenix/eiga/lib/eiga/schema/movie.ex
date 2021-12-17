@@ -27,9 +27,8 @@ defmodule Eiga.Schema.Movie do
   def changeset(record, params \\ %{}) do
     keys = __schema__(:fields) -- [:created_at, :inserted_at]
 
-    # TODO: Revisit after data import, maybe year and country can be required, too.
     record
     |> Ecto.Changeset.cast(params, keys)
-    |> Ecto.Changeset.validate_required([:short_title, :title])
+    |> Ecto.Changeset.validate_required([:short_title, :title, :year, :country])
   end
 end
