@@ -16,7 +16,14 @@ defmodule Eiga.Schema.Review do
   @primary_key {:review_id, Ecto.UUID, autogenerate: true}
 
   schema "reviews" do
-    field :short_title, :string
+    belongs_to(
+      :movie,
+      Eiga.Schema.Movie,
+      foreign_key: :short_title,
+      references: :short_title,
+      type: :string
+    )
+
     field :location, :string
     field :view_date, :date
     field :text, :string

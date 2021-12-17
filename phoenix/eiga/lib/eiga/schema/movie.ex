@@ -21,6 +21,8 @@ defmodule Eiga.Schema.Movie do
     field :year, :integer
     field :country, :string
 
+    has_many :reviews, {"reviews", Eiga.Schema.Review}, foreign_key: :short_title
+
     timestamps()
   end
 
