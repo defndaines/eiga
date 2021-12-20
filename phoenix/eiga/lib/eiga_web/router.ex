@@ -12,6 +12,11 @@ defmodule EigaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: EigaWeb.Schema,
+      interface: :simple,
+      context: %{pubsub: EigaWeb.Endpoint}
   end
 
   scope "/", EigaWeb do
