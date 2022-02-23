@@ -1,0 +1,42 @@
+<h1>Listing Titles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tconst</th>
+      <th>Type</th>
+      <th>Primary title</th>
+      <th>Original title</th>
+      <th>Adult</th>
+      <th>Start year</th>
+      <th>End year</th>
+      <th>Runtime</th>
+      <th>Genres</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for title <- @titles do %>
+    <tr>
+      <td><%= title.tconst %></td>
+      <td><%= title.type %></td>
+      <td><%= title.primary_title %></td>
+      <td><%= title.original_title %></td>
+      <td><%= title.adult %></td>
+      <td><%= title.start_year %></td>
+      <td><%= title.end_year %></td>
+      <td><%= title.runtime %></td>
+      <td><%= title.genres %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.title_path(@conn, :show, title) %></span>
+        <span><%= link "Edit", to: Routes.title_path(@conn, :edit, title) %></span>
+        <span><%= link "Delete", to: Routes.title_path(@conn, :delete, title), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Title", to: Routes.title_path(@conn, :new) %></span>

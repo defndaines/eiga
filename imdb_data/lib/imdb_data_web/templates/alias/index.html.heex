@@ -1,0 +1,36 @@
+<h1>Listing Aliases</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tconst</th>
+      <th>Title</th>
+      <th>Region</th>
+      <th>Language</th>
+      <th>Types</th>
+      <th>Attributes</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for alias <- @aliases do %>
+    <tr>
+      <td><%= alias.tconst %></td>
+      <td><%= alias.title %></td>
+      <td><%= alias.region %></td>
+      <td><%= alias.language %></td>
+      <td><%= alias.types %></td>
+      <td><%= alias.attributes %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.alias_path(@conn, :show, alias) %></span>
+        <span><%= link "Edit", to: Routes.alias_path(@conn, :edit, alias) %></span>
+        <span><%= link "Delete", to: Routes.alias_path(@conn, :delete, alias), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Alias", to: Routes.alias_path(@conn, :new) %></span>

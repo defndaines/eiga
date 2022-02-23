@@ -1,0 +1,34 @@
+<h1>Listing People</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nconst</th>
+      <th>Name</th>
+      <th>Birth year</th>
+      <th>Death year</th>
+      <th>Professions</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for person <- @people do %>
+    <tr>
+      <td><%= person.nconst %></td>
+      <td><%= person.name %></td>
+      <td><%= person.birth_year %></td>
+      <td><%= person.death_year %></td>
+      <td><%= person.professions %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.person_path(@conn, :show, person) %></span>
+        <span><%= link "Edit", to: Routes.person_path(@conn, :edit, person) %></span>
+        <span><%= link "Delete", to: Routes.person_path(@conn, :delete, person), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Person", to: Routes.person_path(@conn, :new) %></span>

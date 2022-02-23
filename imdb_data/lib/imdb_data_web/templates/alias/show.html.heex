@@ -1,0 +1,38 @@
+<h1>Show Alias</h1>
+
+<ul>
+
+  <li>
+    <strong>Tconst:</strong>
+    <%= @alias.tconst %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @alias.title %>
+  </li>
+
+  <li>
+    <strong>Region:</strong>
+    <%= @alias.region %>
+  </li>
+
+  <li>
+    <strong>Language:</strong>
+    <%= @alias.language %>
+  </li>
+
+  <li>
+    <strong>Types:</strong>
+    <%= @alias.types %>
+  </li>
+
+  <li>
+    <strong>Attributes:</strong>
+    <%= @alias.attributes %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.alias_path(@conn, :edit, @alias) %></span> |
+<span><%= link "Back", to: Routes.alias_path(@conn, :index) %></span>

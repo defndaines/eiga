@@ -1,0 +1,23 @@
+<h1>Show Review</h1>
+
+<ul>
+
+  <li>
+    <strong>Tconst:</strong>
+    <%= @review.tconst %>
+  </li>
+
+  <li>
+    <strong>Rating:</strong>
+    <%= @review.rating %>
+  </li>
+
+  <li>
+    <strong>Votes:</strong>
+    <%= @review.votes %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.review_path(@conn, :edit, @review) %></span> |
+<span><%= link "Back", to: Routes.review_path(@conn, :index) %></span>

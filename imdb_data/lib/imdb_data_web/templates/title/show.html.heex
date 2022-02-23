@@ -1,0 +1,57 @@
+<h1>Show Title</h1>
+
+<ul>
+  <li>
+    <strong>Primary title:</strong>
+    <%= @title.primary_title %>
+  </li>
+
+  <li>
+    <strong>tconst:</strong>
+    <a href={"https://www.imdb.com/title/#{@title.tconst}/"}>
+      <%= @title.tconst %>
+    </a>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @title.type %>
+  </li>
+
+  <li>
+    <strong>Start year:</strong>
+    <%= @title.start_year %>
+  </li>
+
+  <%= if String.match?(@title.type, ~r/Series$/) do %>
+  <li>
+    <strong>End year:</strong>
+    <%= @title.end_year %>
+  </li>
+  <% end %>
+
+  <li>
+    <strong>Runtime:</strong>
+    <%= @title.runtime %>
+  </li>
+
+  <li>
+    <strong>Genres:</strong>
+    <%= @title.genres %>
+  </li>
+
+  <%= if @title.primary_title != @title.original_title do %>
+  <li>
+    <strong>Original title:</strong>
+    <%= @title.original_title %>
+  </li>
+  <% end %>
+
+  <li>
+    <strong>Adult:</strong>
+    <%= @title.adult %>
+  </li>
+</ul>
+
+<span><%= link "Edit", to: Routes.title_path(@conn, :edit, @title) %></span> |
+<span><%= link "Back", to: Routes.title_path(@conn, :index) %></span>
