@@ -2,7 +2,7 @@ import Config
 
 # Configure your database
 config :eiga, Eiga.Repo,
-  username: "root",
+  username: "postgres",
   password: "postgres",
   database: "eiga_dev",
   hostname: "localhost",
