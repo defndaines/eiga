@@ -7,7 +7,9 @@ April 2007. Back then, the addition of reviews was almost entirely manual. When
 I finally decided to decommission that site, I made a backup of the data.
 
 This repository preserves that data, but also acts as the root for projects
-which utilize that data in one form or another.
+which utilize that data in one form or another. It’s really all playing with
+different frameworks, half of which have been abandoned by their maintainers
+long ago.
 
 ## SQL
 
@@ -29,28 +31,41 @@ data import files, without headers, which are used to import the data into the
 applications.
 
 
-## Maru SQLite
+## Maru SQLite <sub>(2017-01-10)</sub>
 
-The [maru_sqlite](maru_sqlite) project is written in Elixir and uses 
+The [maru_sqlite](maru_sqlite) project is written in Elixir and uses
 [Maru](https://github.com/elixir-maru/maru) and
 [Sqlite.Ecto](https://github.com/jazzyb/sqlite_ecto). It is a fairly manual
 approach to exposing the data, useful for me in exploring putting an Elixir
-project together without Phoenix.
+project together without Phoenix. (The Maru library hasn’t been touched since
+2019.)
 
-## Vase
+## Vase <sub>(2017-03-18)</sub>
 
 The [vase](vase) project is written using the
 [cognitect/vase](https://github.com/cognitect-labs/vase) Clojure library. Vase pushes most
 of the work into configuration files. By default, vase uses Datomic to store
-data. Vase is built on top pedestal.
+data. Vase is built on top pedestal. (The Vase library hasn’t been touched
+since 2019.)
 
-## Pedestal
+## Pedestal <sub>(2017-03-04)</sub>
 
 The [pedestal](pedestal) project is written using the
 [pedestal](https://github.com/pedestal/pedestal) Clojure library. Pedestal
 provides the web service layer. I have not yet determined which database this
 project will use.
 
+## Phoenix <sub>(2021-12-21)</sub>
+
+The [phoenix](phoenix/eiga) project uses the
+[Phoenix](https://www.phoenixframework.org/) Elixir framework.
+
+## IMDb Data <sub>(2022-02-23)</sub>
+
+The [IMDb Data](imdb_data) project was a small
+[Phoenix](https://www.phoenixframework.org/)-based efforts to pull data from
+IMDb.
+
 ## Copyright
 
-Copyright Michael S. Daines, 2000-2018. All Rights Reserved.
+Copyright Michael S. Daines, 2000-2025. All Rights Reserved.

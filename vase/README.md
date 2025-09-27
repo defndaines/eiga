@@ -6,7 +6,7 @@ Exposes the Eiga dataset using [vase](https://github.com/cognitect-labs/vase).
 
 I'm in the process of learning the vase API and configuring the schema and
 endpoints. At this time the loading of data is manual, as it only uses an
-in-memory Datomic database.
+in-memory Datomic database. Last touched 2017-03-18.
 
 ## Getting Started
 

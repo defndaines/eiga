@@ -6,7 +6,7 @@ Web service interface to the Eiga reviews data, using
 ## Current Status
 
 I've only defined the routing scheme for this project, but have not wired in any
-handling or database code.
+handling or database code. Last touched 2017-03-04.
 
 ## Getting Started
 

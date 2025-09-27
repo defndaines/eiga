@@ -2,7 +2,8 @@
 
 This was a small project I built to play around with data from IMDb. It
 doesn't have a clear objective at this point, and the most developed part is
-probably the importation of the IMDb data sets into the DB.
+probably the importation of the IMDb data sets into the DB. Last touched
+2022-02-23.
 
 The [seeds.exs](priv/repo/seeds.exs) script is designed to pull in data from
 the [IMDb Datasets](https://datasets.imdbws.com/). This is data that IMDb

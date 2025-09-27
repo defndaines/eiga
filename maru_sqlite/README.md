@@ -7,7 +7,7 @@ HTTP service interface to the Eiga reviews data, using
 ## Status
 
 This project provides access to all the Eiga data. I didn't complete the
-bundling of the project into a release.
+bundling of the project into a release. Last touched 2017-01-10.
 
 ## Development
 
