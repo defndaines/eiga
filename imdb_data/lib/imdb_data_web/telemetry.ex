@@ -1,6 +1,6 @@
 defmodule IMDbDataWeb.Telemetry do
   @moduledoc """
-  Telementry module, auto-generated from `mix phx.new`.
+  Telemetry module, auto-generated from `mix phx.new`.
   """
 
   use Supervisor
